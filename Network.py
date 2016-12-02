@@ -36,7 +36,7 @@ class Network(object):
             mini_batch_size -- size of batch to be taken in epoch
             eta             -- learning rate (step size of gradient descent)
         """
-        if test_data != None: n_test = len(test_data)
+        if test_data is not None: n_test = len(test_data)
         n = len(training_data)
         for j in np.arange(epochs):
             np.random.shuffle(training_data)
@@ -44,7 +44,7 @@ class Network(object):
                 for k in np.arange(0, n, mini_batch_size)]
             for mini_batch in mini_batches:
                 self.update_mini_batch(mini_batch, eta)
-            if test_data != None:
+            if test_data is not None:
                 print("Epoch {0}: {1} / {2}".format(
                     j, self.evaluate(test_data), n_test))
             else:
