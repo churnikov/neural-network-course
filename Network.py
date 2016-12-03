@@ -16,7 +16,7 @@ class Network(object):
         self.biases = [np.random.randn(y, 1) for y in sizes[1:]]
         self.weights = [np.random.randn(y, x)
                         for x, y in zip(sizes[:-1], sizes[1:])]
-
+        self.error = []
     def feedforward(self, a):
         """
         returns:
@@ -45,8 +45,9 @@ class Network(object):
             for mini_batch in mini_batches:
                 self.update_mini_batch(mini_batch, eta)
             if test_data is not None:
-                print("Epoch {0}: {1} / {2}".format(
-                    j, self.evaluate(test_data), n_test))
+                res = self.evaluate(test_data)
+                print("Epoch {0}: {1} / {2}".format(j, res, n_test))
+                self.error.append(res)
             else:
                 print("Epoch {0} complete".format(j))
 
